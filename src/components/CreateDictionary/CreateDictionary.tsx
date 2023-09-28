@@ -97,6 +97,8 @@ function CreateDictionary() {
         value={word}
         onChange={(e) => setWord(e.target.value)}
       />
+      {/* Visa felmeddelande om det finns ett fel */}
+      {error && <div className="error-message">{error}</div>}
       {/* knappar */}
       <button onClick={handleSearch}>Search</button>
       <button onClick={addToFavorites}>Add to favorites</button>
@@ -112,8 +114,7 @@ function CreateDictionary() {
           showFavoritesInfo={showFavoritesInfo}
         />
       )}
-      {/* Visa felmeddelande om det finns ett fel */}
-      {error && <div className="error-message">{error}</div>}
+      
 
       {/* Visa data */}
       {data && (

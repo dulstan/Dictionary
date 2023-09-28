@@ -1,7 +1,5 @@
-// App.jsx
-
 import React from "react";
-import CreateDictionary from "./components/CreateDictionary";
+import CreateDictionary from "./components/CreateDictionary/CreateDictionary";
 import "./App.css";
 function App() {
   return (

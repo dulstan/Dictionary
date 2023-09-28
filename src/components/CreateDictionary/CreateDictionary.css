@@ -59,21 +59,18 @@ li {
   margin-bottom: 10px;
 }
 
-strong {
-  font-weight: bold;
-}
-
 audio {
   margin-top: 10px;
 }
 
 .error-message {
-  color: rgb(230, 14, 3);
+  color: rgb(205, 8, 8);
   font-size: larger;
   font-weight: bold;
-  background-color: #ccc;
+  background-color:rgba(204, 150, 129, 0.9) ;
   padding: 10px;
   border-radius: 10px;
+
 }
 
 .part-of-speech {
@@ -81,34 +78,5 @@ audio {
   font-size: 30px;
 }
 
-/* FavoriteWords.css */
 
-.favorite-words ul {
-  list-style-type: none;
-  padding: 0;
-}
 
-.favorite-words li {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.favorite-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  padding: 5px 10px;
-  margin-right: 10px;
-}
-
-.remove-button {
-  background-color: #dc3545;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  padding: 5px 10px;
-}
