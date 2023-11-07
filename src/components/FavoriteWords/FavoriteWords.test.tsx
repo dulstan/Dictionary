@@ -7,7 +7,6 @@ import { describe, it } from "vitest";
 describe("FavoriteWords", () => {
   it("renders a list of favorite words", () => {
     const favorites = ["door", "hello", "pen"];
-    // Skapar tomma funktioner för att testa funktioner för att ta bort och visa information om favoritord
     const removeFromFavorites = () => {};
     const showFavoritesInfo = () => {};
 

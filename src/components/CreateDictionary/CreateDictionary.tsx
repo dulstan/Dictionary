@@ -12,14 +12,14 @@ import FavoriteWords from "../FavoriteWords/FavoriteWords";
 const API_BASE_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
 function CreateDictionary() {
-  // state som ska avnändas 
+  // state som ska avnändas
   const [word, setWord] = useState<string>(""); //sökordet
-  const [data, setData] = useState<DictionaryData | null>(null); //api-data 
-  const [error, setError] = useState<string | null>(null);//felmeddelande
+  const [data, setData] = useState<DictionaryData | null>(null); //api-data
+  const [error, setError] = useState<string | null>(null); //felmeddelande
 
   const [favorites, setFavorites] = useState<string[]>([]); //användarens favorit ord
-  const [showFavorites, setShowFavorites] = useState(false);//visa/dölja favorite ordet
-  const [audioKey, setAudioKey] = useState<number>(0); // uppdatera ljudet för varje ord man söker 
+  const [showFavorites, setShowFavorites] = useState(false); //visa/dölja favorite ordet
+  const [audioKey, setAudioKey] = useState<number>(0); // uppdatera ljudet för varje ord man söker
 
   //useEffect för att ladda favorit ordet från localStorage
   useEffect(() => {
@@ -32,9 +32,12 @@ function CreateDictionary() {
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
+  // Funktion för att visa ett felmeddelande när ordet inte finns i API:et
+
+ 
   // hantera sökning funktionen
   const handleSearch = async () => {
-    // öka key för att uppdatera ljudet 
+    // öka key för att uppdatera ljudet
     setAudioKey((prevKey) => prevKey + 1);
 
     if (!word) {
@@ -48,20 +51,20 @@ function CreateDictionary() {
       const response = await fetch(`${API_BASE_URL}${word}`);
       const data = await response.json();
 
-      if (data) {
+      if (data && data.length >0) {
         setData(data);
-        setError(null);
       } else {
-        setData(null);
         setError("We cannot find this word in the dictionary");
+
+        setData(null);
       }
-    } 
-    catch (error) {
+    } catch (error) {
       console.error("Error", error);
       setData(null);
       setError("Error");
     }
   };
+
   // lägga till ett ord till favorite lista funktionen
   const addToFavorites = async () => {
     if (data && data[0]?.word) {
@@ -99,31 +102,33 @@ function CreateDictionary() {
       />
       {/* Visa felmeddelande om det finns ett fel */}
       {error && <div className="error-message">{error}</div>}
+
+      
+
       {/* knappar */}
       <button onClick={handleSearch}>Search</button>
       <button onClick={addToFavorites}>Add to favorites</button>
-      <button onClick={() => setShowFavorites(!showFavorites)}>
+      <button onClick={() => setShowFavorites(!showFavorites)} data-testid="show-favorites-button">
         {showFavorites ? "Hide favorites" : "Show favorites"}
       </button>
 
       {/* Visa favoritord */}
-      {showFavorites && (
+      {showFavorites  && (
         <FavoriteWords
           favorites={favorites}
           removeFromFavorites={removeFromFavorites}
           showFavoritesInfo={showFavoritesInfo}
-        />
+          />
       )}
-      
 
       {/* Visa data */}
       {data && (
         <article className="definition">
-          <h2>The Word: {data[0]?.word}</h2>
+          <h2 data-testid="word" > {data[0]?.word}</h2>
           {data[0]?.phonetics && (
             <section>
               {/* Rubrik för fonetik */}
-              <h3>phonetic:</h3>
+              <h3 data-testid="phonetic">phonetic:</h3>
               <ul>
                 {data[0]?.phonetics.map((phonetic: Phonetic, index: number) => (
                   <li key={index}>{phonetic.text}</li>
